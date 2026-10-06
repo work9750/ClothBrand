@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A word for you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--ink:#1c1c1e;--glass:rgba(255,255,255,.55);--edge:rgba(28,28,30,.18);--soft:rgba(28,28,30,.62);--petal:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111;--ink:#f4f4f5;--glass:rgba(30,30,32,.55);--edge:rgba(244,244,245,.22);--soft:rgba(244,244,245,.68);--petal:#111}}
+:root[data-theme="dark"]{--bg:#111;--ink:#f4f4f5;--glass:rgba(30,30,32,.55);--edge:rgba(244,244,245,.22);--soft:rgba(244,244,245,.68);--petal:#111}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Lora',Georgia,serif;display:flex;align-items:center;justify-content:center;padding:32px 20px;overflow-x:hidden;position:relative}
+.br{position:fixed;bottom:0;width:min(44vw,360px);height:auto;pointer-events:none;z-index:0;overflow:visible}
+.br.l{left:0}.br.r{right:0;transform:scaleX(-1)}
+.br *{vector-effect:non-scaling-stroke}
+main{position:relative;z-index:1;width:100%;max-width:540px}
+.card{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border:1px solid var(--edge);border-radius:28px;padding:32px 28px 24px;box-shadow:0 12px 44px rgba(0,0,0,.1)}
+#c{transition:opacity .35s}
+.fade{opacity:0}
+h1{font-family:'Permanent Marker','Arial Black',Impact,sans-serif;font-weight:400;font-size:clamp(26px,7vw,38px);line-height:1.2;margin:0 0 20px;text-align:center}
+blockquote{margin:0;padding-top:20px;border-top:1px solid var(--edge);font-size:clamp(17px,4.4vw,20px);line-height:1.65;font-style:italic;text-align:center}
+cite{display:block;margin-top:14px;font-family:'Permanent Marker','Arial Black',sans-serif;font-style:normal;font-size:17px;text-align:center;color:var(--soft)}
+.row{text-align:center}
+button{margin-top:22px;font:inherit;font-size:15px;color:var(--ink);background:transparent;border:1px solid var(--edge);border-radius:999px;padding:10px 22px;cursor:pointer}
+button:hover{background:var(--edge)}
+button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){#c{transition:none}}
+</style>
+</head>
+<body>
+<svg class="br l" id="br" viewBox="-10 -10 170 220" aria-hidden="true">
+<defs><g id="f"><ellipse cx="0" cy="-6" rx="3.6" ry="6"/><ellipse cx="0" cy="-6" rx="3.6" ry="6" transform="rotate(72)"/><ellipse cx="0" cy="-6" rx="3.6" ry="6" transform="rotate(144)"/><ellipse cx="0" cy="-6" rx="3.6" ry="6" transform="rotate(216)"/><ellipse cx="0" cy="-6" rx="3.6" ry="6" transform="rotate(288)"/><circle r="1.3" fill="var(--ink)" stroke="none"/></g></defs>
+<g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round">
+<path d="M0 210C30 175 40 135 70 110S110 72 135 40"/><path d="M42 148C70 146 92 124 112 128"/><path d="M84 104C98 96 104 82 118 78"/><path d="M118 58C124 52 128 48 135 40" stroke-width="1.4"/></g>
+<g fill="var(--petal)" stroke="var(--ink)" stroke-width="1.1">
+<use href="#f" x="70" y="108"/><use href="#f" x="135" y="38"/><use href="#f" x="112" y="127"/><use href="#f" x="118" y="76"/><use href="#f" x="40" y="148"/><use href="#f" x="22" y="176" transform="translate(22 176) scale(.7) translate(-22 -176)"/></g>
+</svg>
+<main>
+<section class="card" aria-live="polite">
+<div id="c">
+<h1 id="h"></h1>
+<blockquote id="t"></blockquote>
+<cite id="r"></cite>
+</div>
+<div class="row"><button id="b" type="button">Show another</button></div>
+</section>
+</main>
+<script>
+const V=[
+["You are loved more deeply than you know.","Jeremiah 31:3","Yea, I have loved thee with an everlasting love: therefore with lovingkindness have I drawn thee."],
+["There is no one else quite like you, and that is by design.","1 Peter 2:9","But ye are a chosen generation, a royal priesthood, an holy nation, a peculiar people; that ye should shew forth the praises of him who hath called you out of darkness into his marvellous light."],
+["Nothing in your life can put you out of His reach.","Romans 8:38-39","For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord."],
+["Someone is celebrating you today.","Zephaniah 3:17","The LORD thy God in the midst of thee is mighty; he will save, he will rejoice over thee with joy; he will rest in his love, he will joy over thee with singing."],
+["You are precious and honoured, just as you are.","Isaiah 43:4","Since thou wast precious in my sight, thou hast been honourable, and I have loved thee."],
+["You never had to earn His love.","Romans 5:8","But God commendeth his love toward us, in that, while we were yet sinners, Christ died for us."],
+["You were worth everything to Him.","John 3:16","For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."],
+["Your ability to love began with being loved first.","1 John 4:19","We love him, because he first loved us."],
+["You are made with care, and it shows.","Psalm 139:14","I will praise thee; for I am fearfully and wonderfully made: marvellous are thy works; and that my soul knoweth right well."],
+["Your best days are still being written.","Jeremiah 29:11","For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end."],
+["You are stronger than this moment feels.","Isaiah 41:10","Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness."],
+["Even on a heavy day, you are not alone.","Psalm 34:18","The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit."],
+["Today is a fresh start for you.","Lamentations 3:22-23","It is of the LORD'S mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness."],
+["You are allowed to rest.","Matthew 11:28","Come unto me, all ye that labour and are heavy laden, and I will give you rest."],
+["Your path is clearer than you think.","Proverbs 3:5-6","Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths."],
+["The love you give is the best thing about you.","1 Corinthians 13:13","And now abideth faith, hope, charity, these three; but the greatest of these is charity."],
+["Love like yours cannot be put out.","Song of Solomon 8:7","Many waters cannot quench love, neither can the floods drown it."],
+["You are braver than you give yourself credit for.","Joshua 1:9","Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest."],
+["You are covered in blessing today.","Numbers 6:24-26","The LORD bless thee, and keep thee: The LORD make his face shine upon thee, and be gracious unto thee: The LORD lift up his countenance upon thee, and give thee peace."],
+["Mountains may move, but you are not forgotten.","Isaiah 54:10","For the mountains shall depart, and the hills be removed; but my kindness shall not depart from thee, neither shall the covenant of my peace be removed, saith the LORD that hath mercy on thee."],
+["Good things are following you.","Psalm 23:6","Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever."],
+["You can do more than you think.","Philippians 4:13","I can do all things through Christ which strengtheneth me."]
+];
+const c=document.getElementById('c'),h=document.getElementById('h'),t=document.getElementById('t'),r=document.getElementById('r');
+const l=document.getElementById('br'),rt=l.cloneNode(true);rt.removeAttribute('id');rt.setAttribute('class','br r');
+rt.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));rt.querySelector('defs').remove();
+rt.querySelectorAll('use').forEach(u=>u.setAttribute('href','#f'));document.body.appendChild(rt);
+let last=-1;
+function pick(){let i;do{i=Math.floor(Math.random()*V.length)}while(i===last);last=i;return V[i]}
+function show(first){
+  const v=pick();
+  const set=()=>{h.textContent=v[0];t.textContent='\u201C'+v[2]+'\u201D';r.textContent=v[1];c.classList.remove('fade')};
+  if(first){set();return}
+  c.classList.add('fade');setTimeout(set,300);
+}
+document.getElementById('b').addEventListener('click',()=>show(false));
+show(true);
+</script>
+</body>
+</html>
