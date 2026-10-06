@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="yo">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bible Verse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--ink:#1c1c1e;--glass:rgba(255,255,255,.55);--edge:rgba(28,28,30,.18);--soft:rgba(28,28,30,.6);--branch:#1c1c1e;--petal:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111;--ink:#f4f4f5;--glass:rgba(30,30,32,.55);--edge:rgba(244,244,245,.2);--soft:rgba(244,244,245,.65);--branch:#f4f4f5;--petal:#111}}
+:root[data-theme="dark"]{--bg:#111;--ink:#f4f4f5;--glass:rgba(30,30,32,.55);--edge:rgba(244,244,245,.2);--soft:rgba(244,244,245,.65);--branch:#f4f4f5;--petal:#111}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Lora',Georgia,serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:32px 20px;overflow-x:hidden;position:relative}
+.branches{position:fixed;left:0;right:0;bottom:0;width:100%;height:46vh;pointer-events:none;z-index:0}
+.branches *{vector-effect:non-scaling-stroke}
+header,main{position:relative;z-index:1;width:100%;max-width:520px}
+h1{font-family:'Permanent Marker','Arial Black',Impact,sans-serif;font-weight:400;margin:0;line-height:1.1;text-align:center;font-size:clamp(40px,12vw,76px)}
+h1 small{display:block;font-size:clamp(22px,6vw,34px);text-align:left;padding-left:8%}
+h1 b{display:block;font-weight:400;font-size:clamp(44px,13vw,84px);letter-spacing:.01em;margin:4px 0}
+h1 span{display:block;font-size:clamp(18px,5vw,28px);text-align:right;padding-right:6%}
+.card{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border:1px solid var(--edge);border-radius:24px;padding:28px 26px 22px;box-shadow:0 10px 40px rgba(0,0,0,.08)}
+blockquote{margin:0;font-size:clamp(18px,4.6vw,22px);line-height:1.6;font-style:italic;transition:opacity .35s}
+cite{display:block;margin-top:16px;font-family:'Permanent Marker','Arial Black',sans-serif;font-style:normal;font-size:18px}
+button{margin-top:20px;font:inherit;font-size:15px;color:var(--ink);background:transparent;border:1px solid var(--edge);border-radius:999px;padding:10px 20px;cursor:pointer}
+button:hover{background:var(--edge)}
+button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.fade{opacity:0}
+@media (prefers-reduced-motion:reduce){blockquote{transition:none}}
+</style>
+</head>
+<body>
+<svg class="branches" viewBox="0 0 400 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+<defs><g id="f"><circle cx="0" cy="-5" r="4.5"/><circle cx="4.8" cy="-1.5" r="4.5"/><circle cx="3" cy="4" r="4.5"/><circle cx="-3" cy="4" r="4.5"/><circle cx="-4.8" cy="-1.5" r="4.5"/><circle cx="0" cy="0" r="1.2" fill="var(--branch)"/></g></defs>
+<g fill="none" stroke="var(--branch)" stroke-width="2" stroke-linecap="round">
+<path d="M0 200C30 170 40 130 70 110S110 70 130 40"/><path d="M45 140C70 140 90 120 110 125"/><path d="M80 105C95 95 100 80 115 78"/>
+<path d="M400 200C370 170 360 130 330 105S290 60 275 30"/><path d="M355 145C330 145 310 125 290 130"/><path d="M320 98C305 90 300 75 285 72"/></g>
+<g fill="var(--petal)" stroke="var(--branch)" stroke-width="1">
+<use href="#f" x="70" y="108"/><use href="#f" x="130" y="40"/><use href="#f" x="110" y="125"/><use href="#f" x="115" y="78"/><use href="#f" x="40" y="145"/><use href="#f" x="95" y="150" transform="scale(.8)"/>
+<use href="#f" x="330" y="104"/><use href="#f" x="275" y="30"/><use href="#f" x="290" y="130"/><use href="#f" x="285" y="72"/><use href="#f" x="360" y="145"/></g>
+</svg>
+<main>
+<section class="card" aria-live="polite">
+<blockquote id="t"></blockquote>
+<cite id="r"></cite>
+<button id="b" type="button">Show another</button>
+</section>
+</main>
+<script>
+const V=[
+["Jeremiah 31:3","Yea, I have loved thee with an everlasting love: therefore with lovingkindness have I drawn thee."],
+["1 Peter 2:9","But ye are a chosen generation, a royal priesthood, an holy nation, a peculiar people; that ye should shew forth the praises of him who hath called you out of darkness into his marvellous light."],
+["Romans 8:38-39","For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord."],
+["Zephaniah 3:17","The LORD thy God in the midst of thee is mighty; he will save, he will rejoice over thee with joy; he will rest in his love, he will joy over thee with singing."],
+["Isaiah 43:4","Since thou wast precious in my sight, thou hast been honourable, and I have loved thee."],
+["Romans 5:8","But God commendeth his love toward us, in that, while we were yet sinners, Christ died for us."],
+["John 3:16","For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."],
+["1 John 4:19","We love him, because he first loved us."],
+["Psalm 139:14","I will praise thee; for I am fearfully and wonderfully made: marvellous are thy works; and that my soul knoweth right well."],
+["Jeremiah 29:11","For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end."],
+["Isaiah 41:10","Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness."],
+["Psalm 34:18","The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit."],
+["Lamentations 3:22-23","It is of the LORD'S mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness."],
+["Matthew 11:28","Come unto me, all ye that labour and are heavy laden, and I will give you rest."],
+["Proverbs 3:5-6","Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths."],
+["1 Corinthians 13:13","And now abideth faith, hope, charity, these three; but the greatest of these is charity."],
+["Song of Solomon 8:7","Many waters cannot quench love, neither can the floods drown it."],
+["Joshua 1:9","Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest."],
+["Numbers 6:24-26","The LORD bless thee, and keep thee: The LORD make his face shine upon thee, and be gracious unto thee: The LORD lift up his countenance upon thee, and give thee peace."],
+["Isaiah 54:10","For the mountains shall depart, and the hills be removed; but my kindness shall not depart from thee, neither shall the covenant of my peace be removed, saith the LORD that hath mercy on thee."],
+["Psalm 23:6","Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever."],
+["Philippians 4:13","I can do all things through Christ which strengtheneth me."]
+];
+const t=document.getElementById('t'),r=document.getElementById('r'),b=document.getElementById('b');
+let last=-1;
+function pick(){let i;do{i=Math.floor(Math.random()*V.length)}while(i===last&&V.length>1);last=i;return V[i]}
+function show(first){
+  const v=pick();
+  const set=()=>{t.textContent='\u201C'+v[1]+'\u201D';r.textContent=v[0];t.classList.remove('fade')};
+  if(first){set();return}
+  t.classList.add('fade');setTimeout(set,300);
+}
+b.addEventListener('click',()=>show(false));
+show(true);
+</script>
+</body>
+</html>
